@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="javacc:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/javacc_jar</output-path>
+    <root id="archive" name="javacc.jar">
+      <element id="module-output" name="javacc" />
+    </root>
+  </artifact>
+</component>

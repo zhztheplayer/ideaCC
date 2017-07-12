@@ -3,6 +3,7 @@ package org.gark87.idea.javacc;
 import com.intellij.ide.structureView.*;
 import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 import com.intellij.lang.PsiStructureViewFactory;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
@@ -15,6 +16,7 @@ import org.gark87.idea.javacc.psi.Identifier;
 import org.gark87.idea.javacc.psi.JavaCCFileImpl;
 import org.gark87.idea.javacc.psi.reference.JavaCCScopeProcessor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -32,15 +34,15 @@ public class JavaCCStructureViewBuilderFactory implements PsiStructureViewFactor
         final JavaCCFileImpl file = (JavaCCFileImpl) psiFile;
         return new TreeBasedStructureViewBuilder() {
 
+            @NotNull
+            @Override
+            public StructureViewModel createStructureViewModel(@Nullable Editor editor) {
+                return new StructureViewModelBase(file, editor, new JavaCCFileTreeElement(file));
+            }
+
             @Override
             public boolean isRootNodeShown() {
                 return false;
-            }
-
-            @NotNull
-            @Override
-            public StructureViewModel createStructureViewModel() {
-                return new StructureViewModelBase(file, new JavaCCFileTreeElement(file));
             }
         };
     }
